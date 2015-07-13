@@ -13,13 +13,18 @@
  * Module dependencies
  * @private
  */
-var winston = require('winston');
+var winston = require('winston'),
+  httpStatus = require('http-status');
+
+var TEST_ENV = 'test';
 
 /**
  * Constructor function
  */
-function CanvaraResponser(options) {
-  this.options = options || {};
+function CanvaraResponser(opts) {
+  var options = opts || {};
+  options.defaultStatusCode = options.defaultStatusCode ? options.defaultStatusCode: httpStatus.OK;
+  this.options = options;
 }
 
 /**
@@ -31,7 +36,23 @@ function CanvaraResponser(options) {
  * @param   {Function}  next            next function(middleware) to call
  */
 CanvaraResponser.prototype.middleware = function(req, res, next) {
-  
+  if(!req.data) {
+    if(next) {
+      return next();
+    } else {
+      res.end();
+    }
+  }
+  // log the response if environment is not test and debug is set to true
+  if(process.env.NODE_ENV !== TEST_ENV && this.options.debug) {
+    winston.debug('Exiting from responser [' + JSON.stringify(req.data) + ']');
+  }
+  var statusCode = req.data.statusCode || this.options.defaultStatusCode;
+  if(req.data.content) {
+    res.status(statusCode).json(req.data.content);
+  } else {
+    res.status(req.data.statusCode || httpStatus.NO_CONTENT).send();
+  }
 };
 
 // module exports

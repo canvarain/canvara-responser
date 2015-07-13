@@ -25,6 +25,7 @@
   "license": "UNLICENSED",
   "main": "index.js",
   "dependencies": {
+    "http-status": "^0.2.0",
     "winston": "^1.0.0"
   },
   "devDependencies": {
