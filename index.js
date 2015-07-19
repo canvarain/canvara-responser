@@ -13,7 +13,7 @@
  * Module dependencies
  * @private
  */
-var winston = require('winston'),
+var logging = require('canvara-logging'),
   httpStatus = require('http-status');
 
 var TEST_ENV = 'test';
@@ -45,7 +45,7 @@ CanvaraResponser.prototype.middleware = function(req, res, next) {
   }
   // log the response if environment is not test and debug is set to true
   if(process.env.NODE_ENV !== TEST_ENV && this.options.debug) {
-    winston.debug('Exiting from responser [' + JSON.stringify(req.data) + ']');
+    logging.debug('Exiting from responser', req.data);
   }
   var statusCode = req.data.statusCode || this.options.defaultStatusCode;
   if(req.data.content) {
