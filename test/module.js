@@ -58,7 +58,7 @@ describe('<Module test>', function() {
       .expect(httpStatus.NOT_FOUND, done);
   });
 
-  it('Should return 200 be default', function(done) {
+  it('Should return 200 by default', function(done) {
     var server = app.createServer({ content: {name: 'dummy'} });
     request(server)
       .get('/')

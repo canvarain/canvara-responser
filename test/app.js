@@ -28,7 +28,8 @@ exports.createServer = function(data, options) {
   var app = express();
   app.get('/', function(req, res, next) {
     req.data = data;
-    responser.middleware(req, res, next);
+    next();
   });
+  app.use(responser.middleware());
   return app;
 };

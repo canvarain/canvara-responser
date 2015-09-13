@@ -13,7 +13,7 @@
  * Module dependencies
  * @private
  */
-var logging = require('canvara-logging'),
+var logging = require('@canvara/canvara-logging'),
   httpStatus = require('http-status');
 
 var TEST_ENV = 'test';
@@ -35,24 +35,27 @@ function CanvaraResponser(opts) {
  * @param   {Object}    res             express response instance
  * @param   {Function}  next            next function(middleware) to call
  */
-CanvaraResponser.prototype.middleware = function(req, res, next) {
-  if(!req.data) {
-    if(next) {
-      return next();
-    } else {
-      res.end();
+CanvaraResponser.prototype.middleware = function() {
+  var _self = this;
+  return function(req, res, next) {
+    if(!req.data) {
+      if(next) {
+        return next();
+      } else {
+        res.end();
+      }
     }
-  }
-  // log the response if environment is not test and debug is set to true
-  if(process.env.NODE_ENV !== TEST_ENV && this.options.debug) {
-    logging.debug('Exiting from responser', req.data);
-  }
-  var statusCode = req.data.statusCode || this.options.defaultStatusCode;
-  if(req.data.content) {
-    res.status(statusCode).json(req.data.content);
-  } else {
-    res.status(req.data.statusCode || httpStatus.NO_CONTENT).send();
-  }
+    // log the response if environment is not test and debug is set to true
+    if(process.env.NODE_ENV !== TEST_ENV && _self.options.debug) {
+      logging.debug('Exiting from responser', req.data);
+    }
+    var statusCode = req.data.statusCode || _self.options.defaultStatusCode;
+    if(req.data.content) {
+      res.status(statusCode).json(req.data.content);
+    } else {
+      res.status(req.data.statusCode || httpStatus.NO_CONTENT).send();
+    }
+  };
 };
 
 // module exports
