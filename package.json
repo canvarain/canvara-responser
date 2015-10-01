@@ -1,8 +1,7 @@
 {
   "name": "@canvara/canvara-responser",
   "description": "canvara: common client response serialization module",
-  "version": "1.0.0",
-  "private": true,
+  "version": "0.1.0",
   "author": {
     "name": "Ritesh Sangwan",
     "email": "sangwan.ritesh@yahoo.in"
@@ -14,23 +13,23 @@
     "middleware"
   ],
   "bugs": {
-    "url": "https://github.com/billidin/canvara-responser/issues"
+    "url": "https://github.com/canvarain/canvara-responser/issues"
   },
   "contributors": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/billidin/canvara-responser.git"
+    "url": "https://github.com/canvarain/canvara-responser.git"
   },
-  "homepage": "https://github.com/billidin/canvara-responser",
+  "homepage": "https://github.com/canvarain/canvara-responser",
   "license": "UNLICENSED",
   "main": "index.js",
   "dependencies": {
     "http-status": "^0.2.0",
-    "@canvara/canvara-logging": "^1.0.0"
+    "@canvara/canvara-logging": "^0.1.0"
   },
   "devDependencies": {
     "express": "^4.13.1",
-    "grunt-cli": "^0.1.13",
+    "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-env": "^0.4.1",
     "grunt-mocha-test": "^0.10.2",
@@ -42,7 +41,9 @@
     "node": "0.12.x"
   },
   "files": [
-    "Readme.md",
+    "README.md",
+    "HISTORY.md",
+    "LICENSE.md",
     "index.js"
   ],
   "scripts": {}

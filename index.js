@@ -11,7 +11,6 @@
 
 /**
  * Module dependencies
- * @private
  */
 var logging = require('@canvara/canvara-logging'),
   httpStatus = require('http-status');
